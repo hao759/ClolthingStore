@@ -1,0 +1,8 @@
+<!-- <%= parseInt(item.price) %> -->
+<!-- <img style="width: 100px;height: 100px;" src="<%= item.picture %>" /> -->
+
+
+script 
+code
+     myFunction()
+/script

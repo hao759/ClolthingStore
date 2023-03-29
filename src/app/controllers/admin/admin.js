@@ -28,18 +28,7 @@ exports.signUp = async (req, res) => {
     });
   }
 };
-exports.getListUser = async (req, res) => {
-  try {
-    const result = await User.find({});
-    return res.status(200).json({
-      data: result,
-    });
-  } catch (error) {
-    return res.status(400).json({
-      mess: error,
-    });
-  }
-};
+
 exports.signIn = async (req, res) => {
   //   User.findOne({ email: req.body.email }).exec(async (error, user) => {
   //     if (error) return res.status(400).json({ error });
@@ -82,6 +71,19 @@ exports.signIn = async (req, res) => {
       message: "Something went wrong",
     });
 };
-exports.gotoadmin = (req, res) => {
+exports.getListUser = async (req, res) => {
+  try {
+    let result = await User.find({});
+    return res.status(200).json({
+      message: result,
+    });
+  } catch (error) {
+    return res.status(400).json({
+      message: error,
+    });
+  }
+  // res.render("admin/blank", { data: result });
+};
+exports.gotoadmin = async (req, res) => {
   res.render("admin/blank");
 };
