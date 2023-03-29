@@ -16,12 +16,12 @@ const userSchema = new mongoose.Schema({
     trim: true,
     index: true,
   },
-  hashPassword: {
+  password: {
     type: String,
     trim: true,
   },
-  role: {
-    type: String,
+  isAdmin: {
+    type: Boolean,
     //   enum: ["user", "admin"],
   },
 });

@@ -18,7 +18,9 @@ app.use(
   })
 );
 // app.use("/public", express.static(path.join(__dirname, "upload")));
-
+app.use("/public", express.static(__dirname + "/public"));
+app.set("views", __dirname + "/app/views");
+app.set("view engine", "ejs");
 // route(app);
 app.use(route);
 db.connect();
