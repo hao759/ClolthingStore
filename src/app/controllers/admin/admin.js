@@ -28,6 +28,18 @@ exports.signUp = async (req, res) => {
     });
   }
 };
+exports.getListUser = async (req, res) => {
+  try {
+    const result = await User.find({});
+    return res.status(200).json({
+      data: result,
+    });
+  } catch (error) {
+    return res.status(400).json({
+      mess: error,
+    });
+  }
+};
 exports.signIn = async (req, res) => {
   //   User.findOne({ email: req.body.email }).exec(async (error, user) => {
   //     if (error) return res.status(400).json({ error });
@@ -69,4 +81,7 @@ exports.signIn = async (req, res) => {
     return res.status(400).json({
       message: "Something went wrong",
     });
+};
+exports.gotoadmin = (req, res) => {
+  res.render("admin/blank");
 };
