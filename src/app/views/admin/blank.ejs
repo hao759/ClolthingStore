@@ -15,17 +15,14 @@
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
-
     <!-- Custom styles for this template-->
     <link href="public/css/sb-admin-2.min.css" rel="stylesheet">
-
     <!-- ========================================= -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
-
 </head>
 
 <body id="page-top">
@@ -37,41 +34,73 @@
         <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal1"
             data-bs-whatever="@mdo">Thêm sản
             phẩm</button>
+        <!-- Modal update User============ -->
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Update user</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form action="/update" method="post">
+                        <!-- <form> -->
+                        <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">Email :</label>
+                            <input type="text" class="form-control" id="editemail" disabled>
+                        </div>
+                        <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">UserName:</label>
+                            <input type="text" class="form-control" id="edituserName">
+                        </div>
+                        <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">Password:</label>
+                            <input type="text" class="form-control" id="editpassword">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <input type="hidden" id="editid">
+                        <button class="btn btn-danger" onclick="updateuser(this)" style="display: inline-block;">Update
+                            tài khoản</button>
+                    </div>
+                    <!-- </form> -->
+                </div>
+            </div>
+        </div>
+        <!-- Modal add User============ -->
+        <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel1"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Thêm tài khoản</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- thang nay dung form???????????????????????/ -->
+                        <form id="logup_form" method="post">
                             <div class="mb-3">
-                                <label for="recipient-name" class="col-form-label">Tên :</label>
-                                <input type="text" class="form-control" name="Tensp" id="Tensp">
+                                <label for="recipient-name" class="col-form-label">UserName :</label>
+                                <input type="text" class="form-control" name="Tensp" id="userName">
                             </div>
                             <div class="mb-3">
-                                <label for="recipient-name" class="col-form-label">Giá:</label>
-                                <input type="text" class="form-control" name="Giasp" id="Giasp">
+                                <label for="recipient-name" class="col-form-label">Password:</label>
+                                <input type="text" class="form-control" name="Giasp" id="password">
                             </div>
                             <div class="mb-3">
-                                <label for="recipient-name" class="col-form-label">Ảnh:</label>
-                                <input type="text" class="form-control" name="Anhsp" id="Anhsp">
+                                <label for="recipient-name" class="col-form-label">Email:</label>
+                                <input type="text" class="form-control" name="Anhsp" id="email">
                             </div>
-
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
 
-                        <input name="id" id="idd" type="text" value="" hidden />
-                        <button class="btn btn-danger" style="display: inline-block;">Update sản
-                            phẩm</button>
+                        <button class="btn btn-danger" style="display: inline-block;">Thêm tài khoản</button>
                     </div>
                     </form>
                 </div>
             </div>
         </div>
-        <button onclick="myFunction()">Click me</button>
         <table id="example" class="table table-striped container ">
             <thead>
                 <tr>
@@ -82,9 +111,7 @@
                     <th scope="col">Thao tác</th>
                 </tr>
             </thead>
-            <tbody id="body_table">
-
-            </tbody>
+            <tbody id="body_table"></tbody>
         </table>
 
         <!-- ====================================================================== -->
@@ -96,13 +123,11 @@
             </script>
             <script>
                 async function myFunction() {
+                    console.log("fetch data")
                     let temp = "";
                     await fetch("/getListUser")
                         .then(response => response.json())
                         .then(data => {
-                            console.log(data.message)
-                            console.log(data.message.length)
-                            // $('#Tensp').val(data.product.name);
                             if (data.message.length > 0) {
                                 data.message.forEach((itemData) => {
                                     temp += "<tr>";
@@ -110,27 +135,128 @@
                                     temp += "<td>" + itemData.email + "</td>";
                                     temp += "<td>" + itemData.userName + "</td>";
                                     temp += "<td>" + itemData.password + "</td>";
-                                    temp += "<td>" + `<button type="button" data-id="" class="btn btn-info editt"
-                                data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="myFunction(this)"
-                                data-bs-whatever="@mdo">Sửa sản phẩm</button>` + "</td>";
+                                    temp += "<td>" + `<button type="button" data-id=${itemData._id} class="btn btn-info editt"
+                                data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="edituser(this)"
+                                data-bs-whatever="@mdo">Sửa sản phẩm</button>` +
+                                        `<form >
+                                        <button data-id= ${itemData._id} class="btn btn-danger" onclick="deleteuser(this)" style="display: inline-block;"
+                                onclick="return confirm('Are you sure?')">Xóa
+                                sản phẩm
+                            </button>
+                             </form> `+
+                                        "</td>";
                                     temp += "</tr>";
-                                    console.log(itemData._id)
                                 });
                             }
                         })
                         .catch(error => console.log(error));
-                    console.log("========1======")
                     document.getElementById('body_table').innerHTML = temp;
                 }
                 myFunction()
             </script>
+            <script>
+                const productForm = document.getElementById('logup_form');
+                productForm.addEventListener('submit', (event) => {
+                    event.preventDefault();
 
+                    const userName = document.getElementById('userName').value;
+                    const password = document.getElementById('password').value;
+                    const email = document.getElementById('email').value;
+
+                    const _user = {
+                        userName,
+                        password,
+                        email,
+                    };
+
+                    fetch('/adminsignUp', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(_user)
+                    })
+                        .then(response => {
+                            return response.text()
+                        }).then(response => {
+                            // const data = JSON.parse(response);
+                            console.log(response)
+                            // const myLabel = document.querySelector('#notification');
+                            // myLabel.innerHTML = data.mess;
+                            window.location.href = '/admin';
+                        })
+                });
+            </script>
+            <script>
+                function deleteuser(element) {
+                    const _id = element.getAttribute('data-id');
+                    fetch('/deleteUser', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ _id })
+                    })
+                        .then(response => {
+                            return response.text()
+                        }).then(response => {
+                            console.log(response)
+                            window.location.href = '/admin'; // replace with your desired URL
+                        })
+                }
+            </script>
+            <script>
+                function edituser(element) {
+                    const _id = element.getAttribute('data-id');
+                    fetch(`/getUser/${_id}`, {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                    })
+                        .then(response => {
+                            return response.text()
+                        }).then(response => {
+                            const data = JSON.parse(response).data;
+                            console.log(data)
+                            $('#editemail').val(data.email);
+                            $('#edituserName').val(data.userName); editid
+                            $('#editpassword').val(data.password);
+                            $('#editid').val(data._id);
+                        })
+                }
+            </script>
+            <script>
+                function updateuser(element) {
+                    // element.event.preventdefault()
+                    const userName = document.querySelector('#edituserName').value;
+                    const _id = document.querySelector('#editid').value;
+                    const password = document.querySelector('#editpassword').value;
+                    let _user = {
+                        _id,
+                        userName,
+                        password
+                    }//tawts form ???????????
+                    fetch(`/updateUser`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ _user })
+                    })
+                        .then(response => {
+                            return response.text()
+                        }).then(response => {
+                            const data = JSON.parse(response);
+                            window.location.href = '/admin';
+                        })
+                }
+            </script>
 
             <link rel="stylesheet" href="https://cdn.datatables.net/1.13.3/css/jquery.dataTables.min.css">
             <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
             <script src="https://cdn.datatables.net/1.13.3/js/jquery.dataTables.min.js"></script>
             <!-- ====================================================================== -->
-
 </body>
 
 

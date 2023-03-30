@@ -87,3 +87,48 @@ exports.getListUser = async (req, res) => {
 exports.gotoadmin = async (req, res) => {
   res.render("admin/blank");
 };
+exports.deleteUser = async (req, res) => {
+  try {
+    let id = req.body._id;
+    let result = await User.deleteOne({ _id: id }); //deletedCount
+    return res.status(200).json({
+      message: "OK",
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(400).json({
+      message: error,
+    });
+  }
+  // res.render("admin/blank", { data: result });
+};
+
+exports.getUser = async (req, res) => {
+  try {
+    let id = req.params.id;
+    let user = await User.findOne({ _id: id }); //deletedCount
+    return res.status(200).json({
+      data: user,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(400).json({
+      message: error,
+    });
+  }
+};
+exports.updateUser = async (req, res) => {
+  try {
+    // console.log(req.body);
+    let { _id, userName, password } = req.body._user;
+    let user = await User.updateOne({ _id }, { userName, password });
+    return res.status(200).json({
+      data: user,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(400).json({
+      message: error,
+    });
+  }
+};
