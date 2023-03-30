@@ -10,7 +10,7 @@ const {
 
 router.get("/admin", admin.gotoadmin); //tới trang dashboard
 router.get("/signin", (req, res) => {
-  res.render("Signin");
+  res.render("login");
 });
 router.get("/", (req, res) => {
   res.render("index");
