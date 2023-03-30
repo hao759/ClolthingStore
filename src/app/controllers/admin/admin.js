@@ -1,4 +1,5 @@
 const User = require("../../models/user");
+const jwt = require("jsonwebtoken");
 
 exports.signUp = async (req, res) => {
   //   User.findOne({ email: req.body.email }).exec((err, user) => {
@@ -30,43 +31,22 @@ exports.signUp = async (req, res) => {
 };
 
 exports.signIn = async (req, res) => {
-  //   User.findOne({ email: req.body.email }).exec(async (error, user) => {
-  //     if (error) return res.status(400).json({ error });
-  //     if (user) {
-  //       const isPassword = await user.authenticate(req.body.password);
-  //       if (
-  //         isPassword &&
-  //         (user.role === "admin" || user.role === "super-admin")
-  //       ) {
-  //         const token = jwt.sign(
-  //           { _id: user._id, role: user.role },
-  //           process.env.JWT_SECRET,
-  //           { expiresIn: "1d" }
-  //         );
-  //         const { _id, firstName, lastName, email, role, fullName } = user;
-  //         res.cookie("token", token, { expiresIn: "1d" });
-  //         res.status(200).json({
-  //           token,
-  //           user: { _id, firstName, lastName, email, role, fullName },
-  //         });
-  //       } else {
-  //         return res.status(400).json({
-  //           message: "Invalid Password",
-  //         });
-  //       }
-  //     } else {
-  //       return res.status(400).json({ message: "Something went wrong" });
-  //     }
-  //   });
+  let { email, password } = req.body;
   let user = await User.findOne({
-    email: req.body.email,
-    password: req.body.password,
+    email: email,
+    password: password,
   });
-  if (user)
+  if (user) {
+    console.log(user);
+    const token = jwt.sign(
+      { _id: user._id, isAdmin: user.isAdmin },
+      process.env.JWT_SECRET,
+      { expiresIn: "1d" }
+    );
     return res.status(200).json({
-      message: "Login thanh coong",
+      message: token,
     });
-  else
+  } else
     return res.status(400).json({
       message: "Something went wrong",
     });

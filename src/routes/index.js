@@ -3,16 +3,23 @@ const router = express.Router();
 const admin = require("../app/controllers/admin/admin");
 const Category = require("../app/controllers/admin/category");
 const Product = require("../app/controllers/admin/product");
+const {
+  requireSignin,
+  adminMiddleware,
+} = require("../common_middleware/index");
 
 router.get("/admin", admin.gotoadmin); //tới trang dashboard
-router.get("/", (req, res) => {
+router.get("/login", (req, res) => {
   res.render("Signin");
 });
-router.get("/1", (req, res) => {
-  res.render("shop");
+router.get("/", (req, res) => {
+  res.render("index");
 });
 router.get("/signup", (req, res) => {
   res.render("SignUp");
+});
+router.get("/detail", (req, res) => {
+  res.render("detail");
 });
 router.get("/getListUser", admin.getListUser);
 router.post("/deleteUser", admin.deleteUser);

@@ -26,7 +26,7 @@
                                     value="qhao74154@gmail.com">
                             </div>
                             <div class="form-group">
-                                <input value="12345" id="password" type="password" class="form-control"
+                                <input value="qhao74154@gmail.com" id="password" type="password" class="form-control"
                                     placeholder="Password" required>
                                 <span toggle="#password-field"
                                     class="fa fa-fw fa-eye field-icon toggle-password"></span>
@@ -65,19 +65,26 @@
                 password,
                 email,
             };
-
+            const tokenjwt = localStorage.getItem("tokenjwt");
+            let token = tokenjwt ? "Bearer " + tokenjwt : "";
+            console.log("token== " + token)
             fetch('/adminsignIn', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': token
                 },
                 body: JSON.stringify(_user)
             })
-                .then(response => {
-                    console.log(response)
-                    if (response.status == 200)
+                .then(response =>
+                    response.json()
+                ).then(response => {
+                    if (response.message) {
+                        localStorage.setItem("tokenjwt", response.message)
                         window.location.href = '/admin';
-                })
+                    }
+                }
+                )
             // .then(response => {
             //     const data = JSON.parse(response);
 
@@ -86,6 +93,7 @@
 
             //     // window.location.href = '/admin'; // replace with your desired URL
             // })
+
         });
     </script>
 
