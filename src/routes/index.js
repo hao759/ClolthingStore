@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const admin = require("../app/controllers/admin/admin");
 const Category = require("../app/controllers/admin/category");
+const Product = require("../app/controllers/admin/product");
 
 router.get("/admin", admin.gotoadmin); //tới trang dashboard
 router.get("/", (req, res) => {
@@ -21,6 +22,7 @@ router.post("/adminsignIn", admin.signIn);
 const multer = require("multer");
 const shortid = require("shortid");
 const path = require("path");
+const { route } = require("express/lib/router");
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, path.join(path.dirname(__dirname), "public/upload"));
@@ -45,4 +47,10 @@ router.post(
   Category.updatCagetory
 );
 router.post("/deleteCategory", Category.deleteCategory);
+
+//Product========================================
+router.post("/addProduct", upload.single("productImage"), Product.addProduct);
+router.get("/Product", Product.renderview);
+router.get("/getListProduct", Product.getListProduct);
+router.post("/deleteProduct", Product.deleteProduct);
 module.exports = router;

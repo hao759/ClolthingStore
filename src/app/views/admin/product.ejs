@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>SB Admin 2 - Blank</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="public/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+    <!-- Custom styles for this template-->
+    <link href="public/css/sb-admin-2.min.css" rel="stylesheet">
+    <!-- ========================================= -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
+</head>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <%- include('partial/layoutAdmin'); %>
+        <!-- ==================================================================== -->
+        <h1 style="text-align: center;"> Danh sách sản phẩm</h1>
+        <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal1"
+            data-bs-whatever="@mdo">Thêm sản phẩm</button>
+        <!-- Modal update User============ -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Update sản phẩm</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- <form> -->
+                        <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">Tên :</label>
+                            <input type="text" class="form-control" id="editname">
+                        </div>
+                        <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">Mô tả:</label>
+                            <input type="text" class="form-control" id="editdescription">
+                        </div>
+                        <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">Ảnh:</label>
+                            <input type="file" class="form-control" id="editImg">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <input type="hidden" id="editid">
+                        <button class="btn btn-danger" onclick="updatCagetory()" style="display: inline-block;">Update
+                        </button>
+                    </div>
+                    <!-- </form> -->
+                </div>
+            </div>
+        </div>
+        <!-- Modal add User============ -->
+        <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel1"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Thêm sản phẩm</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- thang nay dung form???????????????????????/ -->
+                        <!-- <form id="logup_form" method="post"> -->
+                        <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">Tên sản phẩm:</label>
+                            <input type="text" class="form-control" name="Tensp" id="TenSP">
+                        </div>
+                        <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">Mô tả:</label>
+                            <input type="text" class="form-control" name="Giasp" id="MoTaSP">
+                        </div>
+                        <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">Giá:</label>
+                            <input type="text" class="form-control" name="Giasp" id="PriceSP">
+                        </div>
+                        <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">Ảnh:</label>
+                            <input type="file" class="form-control" name="Anhsp" id="imageProduct">
+                        </div>
+                        <div class="mb-3">
+                            <select id="SelectSelect" class="form-select" aria-label="Default select example"></select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+                        <button onclick="addProduct()" class="btn btn-danger" style="display: inline-block;">Thêm sản
+                            phẩm</button>
+                    </div>
+                    <!-- </form> -->
+                </div>
+            </div>
+        </div>
+        <table id="example" class="table table-striped container ">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">description</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Ảnh</th>
+                    <th scope="col">Loai</th>
+                    <th scope="col">Thao tác</th>
+                </tr>
+            </thead>
+            <tbody id="body_table"></tbody>
+        </table>
+
+        <!-- ====================================================================== -->
+        <%- include('partial/layoutAdmin2'); %>
+            <script defer>
+                async function myFunction() {
+                    let temp = "";
+                    await fetch("/getListProduct")
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.message.length > 0) {
+                                data.message.forEach((itemData) => {
+                                    temp += "<tr>";
+                                    temp += "<th  scope=`row`>" + itemData._id + "</th>";
+                                    temp += "<td>" + itemData.name + "</td>";
+                                    temp += "<td>" + itemData.description + "</td>";
+                                    temp += "<td>" + itemData.price + "</td>";
+                                    temp += `<td> <img style="width: 100px;height: 100px;" src=${itemData.productImage} /></td>`;
+                                    temp += "<td>" + itemData.categoryID + "</td>";
+                                    temp += "<td>" + `<button type="button" data-id=${itemData._id} class="btn btn-info editt"
+                                data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="editCagetory(this)"
+                                data-bs-whatever="@mdo">Sửa (chưua xong) Sản phẩm</button>` +
+                                        `<form >
+                                        <button data-id= ${itemData._id} class="btn btn-danger" onclick="deleteProduct(this)" style="display: inline-block;"
+                                onclick="return confirm('Are you sure?')">Xóa
+                                 Sản phẩm
+                            </button>
+                             </form> `+
+                                        "</td>";
+                                    temp += "</tr>";
+                                });
+                            }
+                        })
+                        .catch(error => console.log(error));
+                    document.getElementById('body_table').innerHTML = temp;
+                }
+                myFunction()
+            </script>
+            <script>
+                $(document).ready(function () {
+                    console.log("=============ok")
+                    $('#example').DataTable();
+                });
+            </script>
+
+
+            <script>
+                function deleteProduct(element) {
+                    const _id = element.getAttribute('data-id');
+                    fetch('/deleteProduct', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ _id })
+                    })
+                        .then(response => {
+                            return response.text()
+                        }).then(response => {
+                            console.log(response)
+                            // window.location.href = '/Product';
+                        })
+                }
+            </script>
+            <script>
+                function editCagetory(element) {
+                    const _id = element.getAttribute('data-id');
+                    fetch(`/getCategory/${_id}`, {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                    })
+                        .then(response => {
+                            return response.text()
+                        }).then(response => {
+                            const data = JSON.parse(response).data;
+                            console.log(data._id)
+                            $('#editid').val(data._id);
+                            $('#editname').val(data.name);
+                            $('#editdescription').val(data.description);
+                            // $('#editImg').val(data.categoryImage);
+                        })
+                }
+            </script>
+            <script>
+                function addProduct() {
+                    const TenSP = document.querySelector('#TenSP');
+                    const MoTaSP = document.querySelector('#MoTaSP');
+                    const PriceSP = document.querySelector('#PriceSP');
+                    const imageProduct = document.querySelector('#imageProduct');
+                    const SelectSelect = document.querySelector('#SelectSelect');
+                    const formData = new FormData();
+                    formData.append('name', TenSP.value);
+                    formData.append('description', MoTaSP.value);
+                    formData.append('PriceSP', PriceSP.value);
+                    formData.append('productImage', imageProduct.files[0]);
+                    formData.append('categoryID', SelectSelect.value);
+
+                    fetch('/addProduct', {
+                        method: 'POST',
+                        body: formData
+                    })
+                        .then(response => {
+                            // Handle the response
+                            console.log(response)
+                            window.location.href = '/Product';
+                        })
+                        .catch(error => {
+                            // Handle the error
+                        });
+                }
+
+
+            </script>
+            <script>
+                function updatCagetory() {
+                    let _id = document.querySelector('#editid');
+                    const name = document.querySelector('#editname');
+                    const description = document.querySelector('#editdescription');
+                    const imageCategory = document.querySelector('#editImg');
+                    const formData = new FormData();
+                    console.log(name.value)
+                    formData.append('_id', _id.value);
+                    formData.append('name', name.value);
+                    formData.append('description', description.value);
+                    formData.append('categoryImage', imageCategory.files[0]);
+
+                    fetch('/updatCagetory', {
+                        method: 'POST',
+                        body: formData
+                    })
+                        .then(response => {
+                            // Handle the response
+                            console.log(response)
+                            window.location.href = '/Category';
+                        })
+                        .catch(error => {
+                            // Handle the error
+                        });
+                }
+            </script>
+            <script>
+                async function myFunction2() {
+                    let temp = "";
+                    await fetch("/getLisCategory")
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.message.length > 0) {
+                                data.message.forEach((itemData) => {
+                                    // temp += "<th  scope=`row`>" + itemData._id + "</th>";
+                                    temp += `<option value=${itemData._id} > ${itemData.name}</option >`;
+                                });
+                            }
+                        })
+                        .catch(error => console.log(error));
+                    document.getElementById('SelectSelect').innerHTML = "<option selected>Open this select menu</option>" + temp;
+                }
+                myFunction2()
+            </script>
+            <link rel="stylesheet" href="https://cdn.datatables.net/1.13.3/css/jquery.dataTables.min.css">
+            <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+            <script src="https://cdn.datatables.net/1.13.3/js/jquery.dataTables.min.js"></script>
+            <!-- ====================================================================== -->
+</body>
+
+</html>
