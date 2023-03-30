@@ -3,7 +3,7 @@ const app = express();
 
 const route = require("./routes/");
 const db = require("./config/db");
-// const path = require("path");
+const path = require("path");
 // let cors = require("cors");
 // app.use(cors());
 const mongoose = require("mongoose");
@@ -17,6 +17,7 @@ app.use(
     extended: true,
   })
 );
+console.log("====" + path.dirname(__dirname) + "==");
 // app.use("/public", express.static(path.join(__dirname, "upload")));
 app.use("/public", express.static(__dirname + "/public"));
 app.set("views", __dirname + "/app/views");
