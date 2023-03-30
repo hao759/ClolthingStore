@@ -9,7 +9,7 @@ const {
 } = require("../common_middleware/index");
 
 router.get("/admin", admin.gotoadmin); //tới trang dashboard
-router.get("/login", (req, res) => {
+router.get("/signin", (req, res) => {
   res.render("Signin");
 });
 router.get("/", (req, res) => {
