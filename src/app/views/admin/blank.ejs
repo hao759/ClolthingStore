@@ -117,7 +117,16 @@
         <!-- ====================================================================== -->
         <%- include('partial/layoutAdmin2'); %>
             <script>
+                // function initDataTable() {
+                //     const table = document.querySelector('#example');
+                //     const dataTable = new window.DataTable(table);
+                // }
+
+                // window.addEventListener('load', function () {
+                //     initDataTable();
+                // });
                 $(document).ready(function () {
+                    console.log("=============ok")
                     $('#example').DataTable();
                 });
             </script>

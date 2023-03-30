@@ -2,9 +2,12 @@ const express = require("express");
 const router = express.Router();
 const admin = require("../app/controllers/admin/admin");
 
-router.get("/admin", admin.gotoadmin);
+router.get("/admin", admin.gotoadmin); //tới trang dashboard
 router.get("/", (req, res) => {
   res.render("Signin");
+});
+router.get("/signup", (req, res) => {
+  res.render("SignUp");
 });
 router.get("/getListUser", admin.getListUser);
 router.post("/deleteUser", admin.deleteUser);

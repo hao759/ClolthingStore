@@ -22,6 +22,10 @@
                         <h3 class="mb-4 text-center">Have an account?</h3>
                         <form id="logup_form" class="signin-form">
                             <div class="form-group">
+                                <input type="text" id="email" class="form-control" placeholder="Enter your email"
+                                    required>
+                            </div>
+                            <div class="form-group">
                                 <input type="text" id="userName" class="form-control" placeholder="Username" required>
                             </div>
                             <div class="form-group">
@@ -30,20 +34,19 @@
                                 <span toggle="#password-field"
                                     class="fa fa-fw fa-eye field-icon toggle-password"></span>
                             </div>
-                            <div class="form-group">
-                                <input type="text" id="email" class="form-control" placeholder="email" required>
-                            </div>
+                            <a href="/">Or Sign In</a>
                             <div class="form-group">
                                 <button type="submit" class="form-control btn btn-primary submit px-3">Sign Up</button>
                             </div>
-                            <div class="form-group d-md-flex">
+
+                            <!-- <div class="form-group d-md-flex">
                                 <div class="w-50">
                                     <label class="checkbox-wrap checkbox-primary">Remember Me
                                         <input type="checkbox" checked>
                                         <span class="checkmark"></span>
                                     </label>
                                 </div>
-                            </div>
+                            </div> -->
                         </form>
 
                     </div>
@@ -80,7 +83,7 @@
                     console.log(response)
                     // const myLabel = document.querySelector('#notification');
                     // myLabel.innerHTML = data.mess;
-                    window.location.href = '/admin'; // replace with your desired URL
+                    window.location.href = '/'; // replace with your desired URL
                 })
         });
     </script>
