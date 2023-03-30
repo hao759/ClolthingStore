@@ -6,3 +6,7 @@ script
 code
      myFunction()
 /script
+
+
+login lấy token cất,
+các hành động sau lấy ra xài
