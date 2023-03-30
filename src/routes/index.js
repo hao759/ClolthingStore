@@ -21,7 +21,6 @@ router.post("/adminsignIn", admin.signIn);
 const multer = require("multer");
 const shortid = require("shortid");
 const path = require("path");
-
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, path.join(path.dirname(__dirname), "public/upload"));
@@ -36,5 +35,14 @@ router.post(
   upload.single("categoryImage"),
   Category.addCategory
 );
+
+router.get("/getCategory/:id", Category.getCategory);
 router.get("/getLisCategory", Category.getLisCategory);
+router.get("/Category", Category.pageCategory);
+router.post(
+  "/updatCagetory",
+  upload.single("categoryImage"),
+  Category.updatCagetory
+);
+router.post("/deleteCategory", Category.deleteCategory);
 module.exports = router;
