@@ -135,8 +135,7 @@
                                 data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="editCagetory(this)"
                                 data-bs-whatever="@mdo">Sửa sản phẩm</button>` +
                                         `<form >
-                                        <button data-id= ${itemData._id} class="btn btn-danger" onclick="deleteCategory(this)" style="display: inline-block;"
-                                onclick="return confirm('Are you sure?')">Xóa
+                                        <button data-id= ${itemData._id} class="btn btn-danger" onclick="deleteCategory(this)" style="display: inline-block;">Xóa
                                 sản phẩm
                             </button>
                              </form> `+
@@ -165,20 +164,25 @@
 
             <script>
                 function deleteCategory(element) {
-                    const _id = element.getAttribute('data-id');
-                    fetch('/deleteCategory', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({ _id })
-                    })
-                        .then(response => {
-                            return response.text()
-                        }).then(response => {
-                            console.log(response)
-                            window.location.href = '/Category'; // replace with your desired URL
+                    var result = confirm("Want to delete?");
+                    if (result) {
+                        //Logic to delete the item
+                        const _id = element.getAttribute('data-id');
+                        fetch('/deleteCategory', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({ _id })
                         })
+                            .then(response => {
+                                return response.text()
+                            }).then(response => {
+                                console.log(response)
+                                window.location.href = '/Category'; // replace with your desired URL
+                            })
+                    }
+
                 }
             </script>
             <script>
