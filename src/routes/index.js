@@ -65,6 +65,8 @@ router.post("/deleteCategory", Category.deleteCategory);
 router.post("/addProduct", upload.single("productImage"), Product.addProduct);
 router.get("/Product", Product.renderview);
 router.get("/getListProduct", Product.getListProduct);
+router.get("/detail/:id", Product.detail);
+router.get("/getProductByID/:_id", Product.getProductByID);
 router.get(
   "/getProductBycategoryID/:categoryID",
   Product.getProductBycategoryID
