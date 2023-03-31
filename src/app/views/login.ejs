@@ -81,7 +81,7 @@
                 ).then(response => {
                     if (response.message) {
                         localStorage.setItem("tokenjwt", response.message)
-                        window.location.href = '/admin';
+                        window.location.href = '/';
                     }
                 }
                 )

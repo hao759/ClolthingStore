@@ -15,6 +15,9 @@ router.get("/signin", (req, res) => {
 router.get("/", (req, res) => {
   res.render("index");
 });
+router.get("/shop/:categoryID", (req, res) => {
+  res.render("shop");
+});
 router.get("/signup", (req, res) => {
   res.render("SignUp");
 });
@@ -62,5 +65,9 @@ router.post("/deleteCategory", Category.deleteCategory);
 router.post("/addProduct", upload.single("productImage"), Product.addProduct);
 router.get("/Product", Product.renderview);
 router.get("/getListProduct", Product.getListProduct);
+router.get(
+  "/getProductBycategoryID/:categoryID",
+  Product.getProductBycategoryID
+);
 router.post("/deleteProduct", Product.deleteProduct);
 module.exports = router;

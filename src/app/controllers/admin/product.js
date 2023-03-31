@@ -41,6 +41,21 @@ exports.getListProduct = async (req, res) => {
   }
   // res.render("admin/blank", { data: result });
 };
+exports.getProductBycategoryID = async (req, res) => {
+  try {
+    let result;
+    if (req.params.categoryID == 1) result = await Product.find({});
+    else result = await Product.find({ categoryID: req.params.categoryID });
+    return res.status(200).json({
+      message: result,
+    });
+  } catch (error) {
+    return res.status(400).json({
+      message: error,
+    });
+  }
+  // res.render("admin/blank", { data: result });
+};
 exports.deleteProduct = async (req, res) => {
   try {
     console.log(req.body);

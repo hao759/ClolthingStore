@@ -6,7 +6,7 @@ exports.requireSignin = (req, res, next) => {
     const user = jwt.verify(token, process.env.JWT_SECRET);
     req.user = user;
   } else {
-    return res.redirect("/login"); //Authorization required
+    return res.redirect("/signin"); //Authorization required
   }
   next();
   //jwt.decode()
