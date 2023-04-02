@@ -7,23 +7,22 @@ const cloudinary = require("cloudinary").v2;
 // Configuration
 exports.addProduct = async (req, res) => {
   // console.log("=======ok=======");
-  let linkimg;
   const linkfile = req.file.destination + "/" + req.file.filename;
   // const linkfile = "C:\\Users\\HP\\Pictures\\Screenshots\\Screenshot(102).png";
-  console.log(linkfile);
+  // console.log(linkfile);
   let filename = req.file.filename;
   const res1 = cloudinary.uploader.upload(linkfile, {
     public_id: `Clothing/${filename}`,
   });
 
-  res1
-    .then((data) => {
-      linkimg = data.secure_url;
-      console.log(data.secure_url);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  let { secure_url: linkimg } = await res1;
+  // .then((data) => {
+  //   linkimg = data.secure_url;
+  //   console.log(data.secure_url);
+  // })
+  // .catch((err) => {
+  //   console.log(err);
+  // });
   // console.log(req.body);
   const { name, description, price, categoryID } = req.body;
   const _product = new Product({
@@ -37,7 +36,9 @@ exports.addProduct = async (req, res) => {
       if (process.env.ENVIRONMENT == "http://localhost:2000")
         _product.productImage =
           process.env.ENVIRONMENT + "/public/upload/" + req.file.filename;
-      else _product.productImage = linkimg;
+      else {
+        _product.productImage = linkimg;
+      }
     }
 
     const result = await _product.save();
