@@ -9,6 +9,14 @@ const path = require("path");
 const mongoose = require("mongoose");
 require("dotenv").config();
 mongoose.set("strictQuery", false);
+const cloudinary = require("cloudinary").v2;
+
+// Configuration
+cloudinary.config({
+  cloud_name: process.env.cloud_name,
+  api_key: process.env.api_key,
+  api_secret: process.env.api_secret,
+});
 
 // app.use(bodyParser.json());
 app.use(express.json());

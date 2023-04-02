@@ -8,6 +8,15 @@ const {
   adminMiddleware,
 } = require("../common_middleware/index");
 
+//   // Generate
+//   // const url = cloudinary.url("olympic_flag1", {
+//   //   width: 100,
+//   //   height: 150,
+//   //   Crop: "fill",
+//   // });
+//   // // The output url
+//   // console.log("url", url);
+// });
 router.get("/admin", admin.gotoadmin); //tới trang dashboard
 router.get("/signin", (req, res) => {
   res.render("login");
