@@ -163,7 +163,7 @@
             <script>
                 $(document).ready(function () {
                     console.log("=============ok")
-                    $('#example').DataTable();
+                    // $('#example').DataTable();
                 });
             </script>
 
@@ -279,6 +279,7 @@
                         })
                         .catch(error => console.log(error));
                     document.getElementById('SelectSelect').innerHTML = "<option selected>Open this select menu</option>" + temp;
+                    $('#example').DataTable();
                 }
                 myFunction2()
             </script>

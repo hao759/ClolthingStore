@@ -126,7 +126,7 @@
                 // });
                 $(document).ready(function () {
                     console.log("=============ok")
-                    $('#example').DataTable();
+                    // $('#example').DataTable();
                 });
             </script>
             <script defer>
@@ -159,6 +159,7 @@
                         })
                         .catch(error => console.log(error));
                     document.getElementById('body_table').innerHTML = temp;
+                    $('#example').DataTable();
                 }
                 myFunction()
             </script>
