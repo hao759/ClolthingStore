@@ -133,7 +133,7 @@
                 async function myFunction() {
                     console.log("fetch data")
                     let temp = "";
-                    await fetch("/getListUser")
+                    fetch("/getListUser")
                         .then(response => response.json())
                         .then(data => {
                             if (data.message.length > 0) {
@@ -156,10 +156,12 @@
                                     temp += "</tr>";
                                 });
                             }
+                        }).then(() => {
+                            document.getElementById('body_table').innerHTML = temp;
+                            $('#example').DataTable();
                         })
                         .catch(error => console.log(error));
-                    document.getElementById('body_table').innerHTML = temp;
-                    $('#example').DataTable();
+
                 }
                 myFunction()
             </script>

@@ -52,7 +52,7 @@ exports.addProduct = async (req, res) => {
 };
 exports.getListProduct = async (req, res) => {
   try {
-    let result = await Product.find({});
+    let result = await Product.find({}).populate("categoryID", "name");
     return res.status(200).json({
       message: result,
     });

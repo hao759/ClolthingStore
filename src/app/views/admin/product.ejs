@@ -140,7 +140,7 @@
                                     temp += "<td>" + itemData.description + "</td>";
                                     temp += "<td>" + itemData.price + "</td>";
                                     temp += `<td> <img style="width: 100px;height: 100px;" src=${itemData.productImage} /></td>`;
-                                    temp += "<td>" + itemData.categoryID + "</td>";
+                                    temp += "<td>" + itemData.categoryID.name + "</td>";
                                     temp += "<td>" + `<button type="button" data-id=${itemData._id} class="btn btn-info editt"
                                 data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="editCagetory(this)"
                                 data-bs-whatever="@mdo">Sửa (chưua xong) Sản phẩm</button>` +
@@ -157,15 +157,16 @@
                         })
                         .catch(error => console.log(error));
                     document.getElementById('body_table').innerHTML = temp;
+                    $('#example').DataTable();
                 }
                 myFunction()
             </script>
-            <script>
-                $(document).ready(function () {
-                    console.log("=============ok")
-                    // $('#example').DataTable();
+            <!-- <script>
+                 $(document).ready(function () {
+                     console.log("=============ok")
+                     $('#example').DataTable();
                 });
-            </script>
+            </script> -->
 
 
             <script>
@@ -279,7 +280,7 @@
                         })
                         .catch(error => console.log(error));
                     document.getElementById('SelectSelect').innerHTML = "<option selected>Open this select menu</option>" + temp;
-                    $('#example').DataTable();
+                    // $('#example').DataTable();
                 }
                 myFunction2()
             </script>

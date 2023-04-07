@@ -3,6 +3,7 @@ const router = express.Router();
 const admin = require("../app/controllers/admin/admin");
 const Category = require("../app/controllers/admin/category");
 const Product = require("../app/controllers/admin/product");
+const Cart = require("../app/controllers/cart");
 const {
   requireSignin,
   adminMiddleware,
@@ -81,4 +82,9 @@ router.get(
   Product.getProductBycategoryID
 );
 router.post("/deleteProduct", Product.deleteProduct);
+
+//Cart
+router.get("/getCartItems", Cart.getCartItems);
+router.post("/addItemToCart", Cart.addItemToCart);
+
 module.exports = router;
