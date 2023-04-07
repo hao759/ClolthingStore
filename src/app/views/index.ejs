@@ -55,7 +55,7 @@
                         <i class="fab fa-instagram"></i>
                     </a>
                     <button onclick="gotoadmin()" id="adminpage" class="btn btn-primary"> Trang Admin</button>
-
+                    <button onclick="logout()" class="btn btn-primary"> Log out</button>
 
                 </div>
             </div>
@@ -541,6 +541,10 @@
 
         <!-- get status code from fetch -->
         <script>
+            function logout() {
+                localStorage.setItem("tokenjwt", "");
+                window.location.href = '/';
+            }
             function gotoadmin() {
                 let tokenjwt = localStorage.getItem("tokenjwt");
                 let token = tokenjwt ? "Bearer " + tokenjwt : "";

@@ -84,7 +84,8 @@ router.get(
 router.post("/deleteProduct", Product.deleteProduct);
 
 //Cart
-router.get("/getCartItems", Cart.getCartItems);
-router.post("/addItemToCart", Cart.addItemToCart);
+router.get("/Cart", Cart.viewCart);
+router.get("/getCartItems", requireSignin, Cart.getCartItems);
+router.post("/addItemToCart", requireSignin, Cart.addItemToCart);
 
 module.exports = router;

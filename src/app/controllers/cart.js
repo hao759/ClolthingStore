@@ -1,5 +1,9 @@
 const Cart = require("../models/cart");
 
+exports.viewCart = (req, res) => {
+  res.render("cart");
+};
+
 function runUpdate(condition, updateData) {
   return new Promise((resolve, reject) => {
     Cart.findOneAndUpdate(condition, updateData, { upsert: true })
@@ -9,11 +13,10 @@ function runUpdate(condition, updateData) {
 }
 
 exports.addItemToCart = async (req, res) => {
-  Cart.findOne({ user: req.body._id }).then(async (cart) => {
+  Cart.findOne({ user: req.user._id }).then(async (cart) => {
     if (cart) {
       //if cart already exists then update cart by quantity
       let promiseArray = [];
-
       req.body.cartItems.forEach((cartItem) => {
         const product = cartItem.product;
         const item = cart.cartItems.find((c) => c.product == product);
@@ -26,7 +29,7 @@ exports.addItemToCart = async (req, res) => {
             },
           };
         } else {
-          condition = { user: req.body._id };
+          condition = { user: req.user._id };
           update = {
             $push: {
               cartItems: cartItem,
@@ -41,7 +44,7 @@ exports.addItemToCart = async (req, res) => {
     } else {
       //if cart not exist then create a new cart
       const cart = new Cart({
-        user: req.body._id,
+        user: req.user._id,
         cartItems: req.body.cartItems,
       });
 
@@ -54,26 +57,23 @@ exports.addItemToCart = async (req, res) => {
 };
 
 exports.getCartItems = async (req, res) => {
-  let cart = await Cart.findOne({ user: req.body._id }).populate(
+  let cart = await Cart.findOne({ user: req.user._id }).populate(
     "cartItems.product",
-    "_id name price productPictures"
+    "_id name price productImage"
   );
-  // .exec((error, cart) => {
-  //   if (error) return res.status(400).json({ error });
   if (cart) {
-    let cartItems = {};
+    let data = [];
     cart.cartItems.forEach((item, index) => {
-      cartItems[item.product._id.toString()] = {
+      data[index] = {
         _id: item.product._id.toString(),
         name: item.product.name,
-        img: item.product.productPictures[0].img,
+        img: item.product.productImage,
         price: item.product.price,
         qty: item.quantity,
       };
     });
-    res.status(200).json({ cartItems });
+    res.status(200).json({ cartItems: data });
   }
-  // });
 };
 
 // new update remove cart items

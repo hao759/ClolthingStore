@@ -5,8 +5,12 @@ exports.requireSignin = (req, res, next) => {
     const token = req.headers.authorization.split(" ")[1];
     const user = jwt.verify(token, process.env.JWT_SECRET);
     req.user = user;
+    console.log("123");
   } else {
-    return res.redirect("/signin"); //Authorization required
+    console.log("456");
+    return res.status(400).json({
+      mess: "Can dang nhap",
+    }); //Authorization required
   }
   next();
   //jwt.decode()

@@ -10,7 +10,7 @@ const mongoose = require("mongoose");
 require("dotenv").config();
 mongoose.set("strictQuery", false);
 const cloudinary = require("cloudinary").v2;
-
+// var bodyParser = require("body-parser");
 // Configuration
 cloudinary.config({
   cloud_name: process.env.cloud_name,
