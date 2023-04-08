@@ -7,6 +7,9 @@
                     token = `Bearer ${tokenjwt}`
                 else
                     token = "";
+
+
+tokenjwt && tokenjwt.id
 ===========================================================================================
  <!-- get status code from fetch -->
                     .then(response => {
@@ -14,10 +17,7 @@
                             window.location.href = '/signin';
                         else
                             return response.json()
-===========================================================================================
-login lấy token cất,
-các hành động sau lấy ra xài
-
+script rồi code (ko cần function rồi goi)
 ===========================================================================================
                     headers: {
                         'Content-Type': 'application/json',          <============
@@ -26,5 +26,34 @@ các hành động sau lấy ra xài
                     body: JSON.stringify(cartItems)
                 })
 ===========================================================================================
+requireSignin   =>>>>>>>>>  lấy token ra,  lấy thông tin trong token ra =>>>>>     đi tiếp  ktra quyền admin
+login lấy token cất,
+các hành động sau lấy ra xài
+===========================================================================================
+
+ var result = confirm("Want to delete?");
+                    if (result) {
+                        //Logic to delete the item
+ $('#editid').val(data._id);
+
+
 <!-- <%= parseInt(item.price) %> -->
 <!-- <img style="width: 100px;height: 100px;" src="<%= item.picture %>" /> -->
+
+===========================================================================================
+
+ const PriceSP = document.querySelector('#PriceSP');
+const imageProduct = document.querySelector('#imageProduct');
+const formData = new FormData();
+ formData.append('name', TenSP.value);
+formData.append('productImage', imageProduct.files[0]);
+fetch('/addProduct', {
+method: 'POST',
+body: formData
+})
+
+
+ <script defer>
+   async function myFunction() {
+                let temp = "";
+                await fetch("/getLisCategory")

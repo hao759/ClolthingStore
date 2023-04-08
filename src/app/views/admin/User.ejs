@@ -151,6 +151,11 @@
                 myFunction()
             </script>
             <script>
+                let tokenjwt = localStorage.getItem("tokenjwt");
+                if (!tokenjwt)
+                    window.location.href = '/signin';
+            </script>
+            <script>
                 const productForm = document.getElementById('logup_form');
                 productForm.addEventListener('submit', (event) => {
                     event.preventDefault();

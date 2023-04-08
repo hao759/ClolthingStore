@@ -116,39 +116,35 @@
 
         <!-- ====================================================================== -->
         <%- include('partial/layoutAdmin2'); %>
-            <script defer>
-                function myFunction() {
-
-                    let temp = "";
-                    fetch("/getLisCategory")
-                        .then(response => response.json())
-                        .then(data => {
-                            if (data.message.length > 0) {
-                                data.message.forEach((itemData) => {
-                                    temp += "<tr>";
-                                    temp += "<th  scope=`row`>" + itemData._id + "</th>";
-                                    temp += "<td>" + itemData.name + "</td>";
-                                    temp += "<td>" + itemData.description + "</td>";
-                                    temp += `<td> <img style="width: 100px;height: 100px;" src=${itemData.categoryImage} /></td>`;
-                                    temp += "<td>" + `<button type="button" data-id=${itemData._id} class="btn btn-info editt"
+            <script>
+                // function myFunction() {
+                let temp = "";
+                fetch("/getLisCategory")
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.message.length > 0) {
+                            data.message.forEach((itemData) => {
+                                temp += "<tr>";
+                                temp += "<th  scope=`row`>" + itemData._id + "</th>";
+                                temp += "<td>" + itemData.name + "</td>";
+                                temp += "<td>" + itemData.description + "</td>";
+                                temp += `<td> <img style="width: 100px;height: 100px;" src=${itemData.categoryImage} /></td>`;
+                                temp += "<td>" + `<button type="button" data-id=${itemData._id} class="btn btn-info editt"
                                 data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="editCagetory(this)"
                                 data-bs-whatever="@mdo">Sửa sản phẩm</button>` +
-                                        `<form >
+                                    `<form >
                                         <button data-id= ${itemData._id} class="btn btn-danger" onclick="deleteCategory(this)" style="display: inline-block;">Xóa
-                                sản phẩm
-                            </button>
-                             </form> `+
-                                        "</td>";
-                                    temp += "</tr>";
-                                });
-                            }
-                        }).then(() => {
-                            document.getElementById('body_table').innerHTML = temp;
-                            $('#example').DataTable();
-                        })
-                        .catch(error => console.log(error));
-                }
-                myFunction()
+                                sản phẩm</button></form> `+ "</td>";
+                                temp += "</tr>";
+                            });
+                        }
+                    }).then(() => {
+                        document.getElementById('body_table').innerHTML = temp;
+                        $('#example').DataTable();
+                    })
+                    .catch(error => console.log(error));
+                // }
+                // myFunction()
             </script>
             <!-- <script>
                 $(document).ready(function () {
@@ -171,7 +167,7 @@
                             .then(response => {
                                 return response.text()
                             }).then(response => {
-                                console.log(response)
+                                // console.log(response)
                                 window.location.href = '/Category'; // replace with your desired URL
                             })
                     }
@@ -194,7 +190,6 @@
                             $('#editid').val(data._id);
                             $('#editname').val(data.name);
                             $('#editdescription').val(data.description);
-                            // $('#editImg').val(data.categoryImage);
                         })
                 }
             </script>
@@ -240,11 +235,10 @@
                     })
                         .then(response => {
                             // Handle the response
-                            console.log(response)
+                            // console.log(response)
                             window.location.href = '/Category';
                         })
                         .catch(error => {
-                            // Handle the error
                         });
                 }
             </script>

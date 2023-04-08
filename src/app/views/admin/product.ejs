@@ -166,7 +166,6 @@
                      $('#example').DataTable();
                 });
             </script> -->
-
             <script>
                 function deleteProduct(element) {
                     const _id = element.getAttribute('data-id');
@@ -181,7 +180,7 @@
                             return response.text()
                         }).then(response => {
                             console.log(response)
-                            // window.location.href = '/Product';
+                            window.location.href = '/Product';
                         })
                 }
             </script>
@@ -224,7 +223,6 @@
                         body: formData
                     })
                         .then(response => {
-                            // Handle the response
                             console.log(response)
                             window.location.href = '/Product';
                         })
@@ -262,9 +260,9 @@
                 }
             </script>
             <script>
-                async function myFunction2() {
+                function myFunction2() {
                     let temp = "";
-                    await fetch("/getLisCategory")
+                    fetch("/getLisCategory")
                         .then(response => response.json())
                         .then(data => {
                             if (data.message.length > 0) {
@@ -273,10 +271,9 @@
                                     temp += `<option value=${itemData._id} > ${itemData.name}</option >`;
                                 });
                             }
-                        })
+                        }).then(() => document.getElementById('SelectSelect').innerHTML = "<option selected>Open this select menu</option>" + temp)
                         .catch(error => console.log(error));
-                    document.getElementById('SelectSelect').innerHTML = "<option selected>Open this select menu</option>" + temp;
-                    // $('#example').DataTable();
+
                 }
                 myFunction2()
             </script>

@@ -53,7 +53,7 @@
                     <a class="text-dark px-2" href="">
                         <i class="fab fa-instagram"></i>
                     </a>
-                    <button onclick="gotoadmin()" id="adminpage" class="btn btn-primary"> Trang Admin</button>
+                    <!-- <button onclick="gotoadmin()" id="adminpage" class="btn btn-primary"> Trang Admin</button> -->
                     <button onclick="logout()" class="btn btn-primary"> Log out</button>
 
                 </div>
@@ -91,23 +91,8 @@
         </div>
     </div>
     <!-- Topbar End -->
-
     <!-- Navbar Start -->
     <%- include('admin/partial/user'); %>
-        <!-- <div class="col-lg-9">
-            <div id="header-carousel" class="carousel slide" data-ride="carousel">
-                <a class="carousel-control-prev" href="#header-carousel" data-slide="prev">
-                    <div class="btn btn-dark" style="width: 45px; height: 45px;">
-                        <span class="carousel-control-prev-icon mb-n2"></span>
-                    </div>
-                </a>
-                <a class="carousel-control-next" href="#header-carousel" data-slide="next">
-                    <div class="btn btn-dark" style="width: 45px; height: 45px;">
-                        <span class="carousel-control-next-icon mb-n2"></span>
-                    </div>
-                </a>
-            </div>
-        </div> -->
         <!-- Navbar End -->
 
 
@@ -158,16 +143,15 @@
             </div>
         </div>
         <!-- Categories End -->
-        <script defer>
-            async function myFunction() {
+        <script>
+            function myFunction() {
                 let temp = "";
-                await fetch("/getLisCategory")
+                fetch("/getLisCategory")
                     .then(response => response.json())
                     .then(data => {
                         if (data.message.length > 0) {
                             data.message.forEach((itemData) => {
-                                temp += `
-<div class="col-lg-4 col-md-6 pb-1">
+                                temp += `<div class="col-lg-4 col-md-6 pb-1">
                 <div class="cat-item d-flex flex-column border mb-4" style="padding: 30px;">
                     <p class="text-right">15 Products</p>
                     <a href="/shop/${itemData._id}" class="cat-img position-relative overflow-hidden mb-3">
@@ -175,13 +159,11 @@
                     </a>
                     <h5 class="font-weight-semi-bold m-0">${itemData.name}</h5>
                 </div>
-            </div>`
-                                // temp += `<td> <img style="width: 100px;height: 100px;" src=${itemData.productImage} /></td>`;
+            </div>`// temp += `<td> <img style="width: 100px;height: 100px;" src=${itemData.productImage} /></td>`;
                             });
                         }
-                    })
+                    }).then(() => document.getElementById('showimgCategory').innerHTML = temp)
                     .catch(error => console.log(error));
-                document.getElementById('showimgCategory').innerHTML = temp;
             }
             myFunction()
         </script>
@@ -211,13 +193,10 @@
                 </div>
             </div>
         </div>
-
         <div class="container-fluid pt-5">
-
         </div>
         </div>
         <!-- Products End -->
-
 
         <!-- Subscribe Start -->
         <div class="container-fluid bg-secondary my-5">
@@ -439,36 +418,32 @@
             </div>
         </div>
         <!-- Footer End -->
-
-
         <!-- Back to Top -->
         <a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
 
-        <!-- get status code from fetch -->
         <script>
             function logout() {
                 localStorage.setItem("tokenjwt", "");
                 window.location.href = '/';
             }
-            function gotoadmin() {
-                let tokenjwt = localStorage.getItem("tokenjwt");
-                let token = tokenjwt ? "Bearer " + tokenjwt : "";
-                console.log("token== " + token)
-                fetch('/admin', {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': token
-                    },
-                    // body: JSON.stringify(tokenjwt)
-                })
-                    .then((response) => {
-                        if (response.status == 100)
-                            window.location.href = '/abc';
-                    }
-                    )
-            }
-
+            // function gotoadmin() {
+            //     let tokenjwt = localStorage.getItem("tokenjwt");
+            //     let token = tokenjwt ? "Bearer " + tokenjwt : "";
+            //     console.log("token== " + token)
+            //     fetch('/admin', {
+            //         method: 'GET',
+            //         headers: {
+            //             'Content-Type': 'application/json',
+            //             'Authorization': token
+            //         },
+            //         // body: JSON.stringify(tokenjwt)
+            //     })
+            //         .then((response) => {
+            //             if (response.status == 100)
+            //                 window.location.href = '/abc';
+            //         }
+            //         )
+            // }
         </script>
         <!-- JavaScript Libraries -->
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>

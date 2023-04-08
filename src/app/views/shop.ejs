@@ -7,7 +7,6 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
-
     <!-- Favicon -->
     <link href="img/favicon.ico" rel="icon">
 
@@ -111,18 +110,6 @@
                             </div>
                         </div>
                     </div>
-                    <div class="carousel-item" style="height: 410px;">
-                        <img class="img-fluid" src="../public/img/carousel-2.jpg" alt="Image">
-                        <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
-                            <div class="p-3" style="max-width: 700px;">
-                                <h4 class="text-light text-uppercase font-weight-medium mb-3">10% Off Your First
-                                    Order</h4>
-                                <h3 class="display-4 text-white font-weight-semi-bold mb-4">Reasonable Price
-                                </h3>
-                                <a href="" class="btn btn-light py-2 px-3">Shop Now</a>
-                            </div>
-                        </div>
-                    </div>
                 </div>
                 <a class="carousel-control-prev" href="#header-carousel" data-slide="prev">
                     <div class="btn btn-dark" style="width: 45px; height: 45px;">
@@ -162,17 +149,7 @@
                 <div class="col-lg-3 col-md-12">
                     <div class="border-bottom mb-4 pb-4">
                         <!--  <h5 class="font-weight-semi-bold mb-4">Filter by price</h5>
-                        <form>
-                            <div
-                                class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                                <input type="checkbox" class="custom-control-input" checked id="price-all">
-                                <label class="custom-control-label" for="price-all">All Price</label>
-                                <span class="badge border font-weight-normal">1000</span>
-                            </div>
-
-                        </form>
                     </div>
-
                     <div class="border-bottom mb-4 pb-4">
                         <h5 class="font-weight-semi-bold mb-4">Filter by color</h5>
                         <form>
@@ -191,12 +168,9 @@
                                 <i class="fa fa-angle-down text-dark"></i>
                             </a>
                             <div id="showCategory" class="navbar-nav w-100 overflow-hidden" style="height: 410px">
-                                <!-- <a href="" class="nav-item nav-link">Blazers</a> -->
                             </div>
-                            <!-- </nav> -->
                         </div>
                     </div>
-
                 </div>
                 <!-- Shop Sidebar End -->
 
@@ -229,13 +203,13 @@
                             </div>
                         </div>
 
-                        <script defer>
-                            async function myFunction() {
+                        <script>
+                            function myFunction() {
                                 var temp = "";
                                 const path = new URL(window.location.href).pathname;
                                 const parts = path.split('/');
                                 const lastPart = parts[parts.length - 1];
-                                await fetch(`/getProductBycategoryID/${lastPart}`)
+                                fetch(`/getProductBycategoryID/${lastPart}`)
                                     .then(response => response.json())
                                     .then(data => {
                                         console.log(data.message)
@@ -266,22 +240,17 @@
                         </div>`
                                             });
                                         }
-                                    })
+                                    }).then(() => document.getElementById('showProduct').innerHTML = temp)
                                     .catch(error => console.log(error));
-                                document.getElementById('showProduct').innerHTML = temp
                             }
                             myFunction()
                         </script>
-
-
-
                     </div>
                 </div>
                 <!-- Shop Product End -->
             </div>
         </div>
         <!-- Shop End -->
-
 
         <!-- Footer Start -->
         <div class="container-fluid bg-secondary text-dark mt-5 pt-5">
@@ -369,7 +338,6 @@
         </div>
         <!-- Footer End -->
 
-
         <!-- Back to Top -->
         <a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
 
@@ -427,9 +395,8 @@
                 })
                     .then((response) => {
                         if (response.status == 201)
-                            alert("Them sp thanh cong")
-                    }
-                    )
+                            alert("Thêm sản phẩm thành công")
+                    })
             }
         </script>
 </body>

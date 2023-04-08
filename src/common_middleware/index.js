@@ -19,7 +19,7 @@ exports.adminMiddleware = (req, res, next) => {
   console.log(req.user);
   if (req.user.isAdmin != true) {
     return res.status(400).json({
-      mess: "Chỉ có admin mới có quyền này",
+      mess: "Chỉ có  admin mới có quyền này",
     });
   }
   console.log("===OK=====");
