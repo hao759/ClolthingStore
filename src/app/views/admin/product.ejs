@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Blank</title>
+   
 
     <!-- Custom fonts for this template-->
     <link href="public/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -124,7 +124,9 @@
             <tbody id="body_table"></tbody>
         </table>
 
-        <!-- ====================================================================== -->
+        <!-- =====================================`<button type="button" data-id=${itemData._id} class="btn btn-info editt"
+                                data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="editCagetory(this)"
+                                data-bs-whatever="@mdo">Sửa (chưua xong) Sản phẩm</button>`================================= -->
         <%- include('partial/layoutAdmin2'); %>
             <script>
                 function myFunction() {
@@ -143,7 +145,7 @@
                                     temp += "<td>" + itemData.categoryID.name + "</td>";
                                     temp += "<td>" + `<button type="button" data-id=${itemData._id} class="btn btn-info editt"
                                 data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="editCagetory(this)"
-                                data-bs-whatever="@mdo">Sửa (chưua xong) Sản phẩm</button>` +
+                                data-bs-whatever="@mdo">Sửa1 Sản phẩm</button>`+
                                         `<form >
                                         <button data-id= ${itemData._id} class="btn btn-danger" onclick="deleteProduct(this)" style="display: inline-block;"
                                 onclick="return confirm('Are you sure?')">Xóa

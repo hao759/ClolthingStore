@@ -6,10 +6,7 @@ const cloudinary = require("cloudinary").v2;
 
 // Configuration
 exports.addProduct = async (req, res) => {
-  // console.log("=======ok=======");
   const linkfile = req.file.destination + "/" + req.file.filename;
-  // const linkfile = "C:\\Users\\HP\\Pictures\\Screenshots\\Screenshot(102).png";
-  // console.log(linkfile);
   let filename = req.file.filename;
   const res1 = cloudinary.uploader.upload(linkfile, {
     public_id: `Clothing/${filename}`,

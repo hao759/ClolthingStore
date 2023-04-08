@@ -7,9 +7,19 @@
                     token = `Bearer ${tokenjwt}`
                 else
                     token = "";
-
+ data.toLocaleString('vi-VN', { style: 'currency', currency: 'VND', minimumFractionDigits: 0 });
+<del></del>
 
 tokenjwt && tokenjwt.id
+===========================================================================================
+ <script>
+            // Retrieve the content of the localStorage
+            var tokenjwt = localStorage.getItem("tokenjwt");
+            if (tokenjwt) {
+                // Display the content of the localStorage in the template
+                document.write('<p>Content of localStorage: ' + tokenjwt + '</p>');
+            } 
+        </script>
 ===========================================================================================
  <!-- get status code from fetch -->
                     .then(response => {

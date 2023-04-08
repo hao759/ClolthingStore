@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>EShopper - Bootstrap Shop Template</title>
+
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
@@ -268,7 +268,7 @@
                         <td class="align-middle"><img src="${itemData.img}" alt="" style="width: 50px;">
                             <input type="hidden" class="form-control idProduct" value="${itemData._id}">
                           </td>
-                        <td class="align-middle">${itemData.price}</td>
+                        <td class="align-middle "><p class="priceProduct">${itemData.price}</p></td>
                         <td class="align-middle">
                             <div class="input-group quantity mx-auto" style="width: 100px;">
                                 <div class="input-group-btn">
@@ -299,8 +299,9 @@
             function addOrder() {
                 let idProduct = document.getElementsByClassName('idProduct');
                 let qtyProduct = document.getElementsByClassName('qtyProduct');
-                let totalPrice = document.getElementById('totalPrice').innerText;
-                let totalAmount = totalPrice.substring(0, totalPrice.length - 2);
+                let priceProduct = document.getElementsByClassName('priceProduct');
+                let totalPrice = 0;
+                // let totalAmount = totalPrice.substring(0, totalPrice.length - 2);
                 let values = [];
 
                 // console.log(totalAmount)
@@ -309,7 +310,10 @@
                         productId: idProduct[i].value,
                         purchasedQty: qtyProduct[i].value
                     });
+                    totalPrice += parseInt(qtyProduct[i].value) * parseInt(priceProduct[i].innerHTML)
                 }
+                console.log(totalPrice)
+
                 let token = "";
                 let tokenjwt = localStorage.getItem("tokenjwt");
                 if (tokenjwt)
@@ -322,7 +326,7 @@
                         'Content-Type': 'application/json',
                         'Authorization': token
                     },
-                    body: JSON.stringify({ items: values, totalAmount })
+                    body: JSON.stringify({ items: values, totalAmount: totalPrice })
                 })
                     .then(response =>
                         response.json()

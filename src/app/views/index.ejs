@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>EShopper - Bootstrap Shop Template</title>
+
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
@@ -54,11 +54,11 @@
                         <i class="fab fa-instagram"></i>
                     </a>
                     <!-- <button onclick="gotoadmin()" id="adminpage" class="btn btn-primary"> Trang Admin</button> -->
-                    <button onclick="logout()" class="btn btn-primary"> Log out</button>
 
                 </div>
             </div>
         </div>
+
         <div class="row align-items-center py-3 px-xl-5">
             <div class="col-lg-3 d-none d-lg-block">
                 <a href="" class="text-decoration-none">
@@ -133,7 +133,7 @@
             <div id="showimgCategory" class="row px-xl-5 pb-3">
                 <div class="col-lg-4 col-md-6 pb-1">
                     <div class="cat-item d-flex flex-column border mb-4" style="padding: 30px;">
-                        <p class="text-right">15 Products</p>
+                        <!-- <p class="text-right">15 Products</p> -->
                         <a href="" class="cat-img position-relative overflow-hidden mb-3">
                             <img class="img-fluid" src="public/img/cat-1.jpg" alt="">
                         </a>
@@ -146,6 +146,7 @@
         <script>
             function myFunction() {
                 let temp = "";
+                //  <p class="text-right">15 Products</p>
                 fetch("/getLisCategory")
                     .then(response => response.json())
                     .then(data => {
@@ -153,7 +154,7 @@
                             data.message.forEach((itemData) => {
                                 temp += `<div class="col-lg-4 col-md-6 pb-1">
                 <div class="cat-item d-flex flex-column border mb-4" style="padding: 30px;">
-                    <p class="text-right">15 Products</p>
+                   
                     <a href="/shop/${itemData._id}" class="cat-img position-relative overflow-hidden mb-3">
                         <img style="width: 50%;height: 50%; class="img-fluid" src="${itemData.categoryImage}" alt="">
                     </a>
@@ -168,7 +169,6 @@
             myFunction()
         </script>
 
-        <!-- Offer Start -->
         <div class="container-fluid offer pt-5">
             <div class="row px-xl-5">
                 <div class="col-md-6 pb-4">
@@ -203,8 +203,12 @@
             <div class="row justify-content-md-center py-5 px-xl-5">
                 <div class="col-md-6 col-12 py-5">
                     <div class="text-center mb-2 pb-2">
-                        <h2 class="section-title px-5 mb-3"><span class="bg-secondary px-2">Stay Updated</span></h2>
-                        <p>Amet lorem at rebum amet dolores. Elitr lorem dolor sed amet diam labore at justo ipsum
+                        <h2 class="section-title px-5 mb-3"><span class="bg-secondary px-2">Stay
+                                Updated</span>
+                        </h2>
+                        <p>Amet lorem at rebum amet dolores. Elitr lorem dolor sed amet diam labore at
+                            justo
+                            ipsum
                             eirmod
                             duo labore labore.</p>
                     </div>
@@ -349,10 +353,14 @@
                 <div class="col-lg-4 col-md-12 mb-5 pr-3 pr-xl-5">
                     <a href="" class="text-decoration-none">
                         <h1 class="mb-4 display-5 font-weight-semi-bold"><span
-                                class="text-primary font-weight-bold border border-white px-3 mr-1">E</span>Shopper</h1>
+                                class="text-primary font-weight-bold border border-white px-3 mr-1">E</span>Shopper
+                        </h1>
                     </a>
                     <p>Dolore erat dolor sit lorem vero amet. Sed sit lorem magna.</p>
-                    <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>123 Street, New York, USA</p>
+                    <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>123 Street,
+                        New
+                        York,
+                        USA</p>
                     <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>info@example.com</p>
                     <p class="mb-0"><i class="fa fa-phone-alt text-primary mr-3"></i>+012 345 67890</p>
                 </div>
@@ -408,7 +416,8 @@
                         &copy; <a class="text-dark font-weight-semi-bold" href="#"> All Rights Reserved.
                             Designed
                             by
-                            <a class="text-dark font-weight-semi-bold" href="https://htmlcodex.com">HTML Codex</a><br>
+                            <a class="text-dark font-weight-semi-bold" href="https://htmlcodex.com">HTML
+                                Codex</a><br>
                             Distributed By <a href="https://themewagon.com" target="_blank">ThemeWagon</a>
                     </p>
                 </div>
@@ -422,10 +431,6 @@
         <a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
 
         <script>
-            function logout() {
-                localStorage.setItem("tokenjwt", "");
-                window.location.href = '/';
-            }
             // function gotoadmin() {
             //     let tokenjwt = localStorage.getItem("tokenjwt");
             //     let token = tokenjwt ? "Bearer " + tokenjwt : "";
