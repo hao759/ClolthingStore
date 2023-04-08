@@ -1,6 +1,5 @@
 const express = require("express");
 const app = express();
-
 const route = require("./routes/");
 const db = require("./config/db");
 const path = require("path");
@@ -11,7 +10,6 @@ require("dotenv").config();
 mongoose.set("strictQuery", false);
 const cloudinary = require("cloudinary").v2;
 // var bodyParser = require("body-parser");
-// Configuration
 cloudinary.config({
   cloud_name: process.env.cloud_name,
   api_key: process.env.api_key,

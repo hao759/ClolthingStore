@@ -27,14 +27,14 @@
                     <div class="navbar-nav mr-auto py-0">
                         <a href="/" class="nav-item nav-link active">Home</a>
                         <a href="/shop/1" class="nav-item nav-link">Shop</a>
-                        <div class="nav-item dropdown">
+                        <a href="/Cart" class="nav-item nav-link">Shopping Cart</a>
+                        <!-- <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
                             <div class="dropdown-menu rounded-0 m-0">
                                 <a href="/Cart" class="dropdown-item">Shopping Cart</a>
                                 <a href="checkout.html" class="dropdown-item">Checkout</a>
                             </div>
-                        </div>
-                        <a href="contact.html" class="nav-item nav-link">Contact</a>
+                        </div> -->
                     </div>
                     <div class="navbar-nav ml-auto py-0">
                         <a href="" class="nav-item nav-link">Login</a>
@@ -91,7 +91,6 @@
 </script>
 
 
-
 <script>
     window.fbAsyncInit = function () {
         window.FB.init({
@@ -99,7 +98,6 @@
             version: "v15.0",
         });
     };
-
     (function (d, s, id) {
         var js,
             fjs = d.getElementsByTagName(s)[0];
@@ -110,21 +108,19 @@
         fjs.parentNode.insertBefore(js, fjs);
     })(document, "script", "facebook-jssdk");
 </script>
-<script defer>
-    async function myFunction1() {
+<script>
+    function myFunction1() {
         let temp = "";
-        await fetch("/getLisCategory")
+        fetch("/getLisCategory")
             .then(response => response.json())
             .then(data => {
                 if (data.message.length > 0) {
                     data.message.forEach((itemData) => {
                         temp += ` <a href="/shop/${itemData._id}" class="nav-item nav-link">${itemData.name}</a>`
-                        // temp += "<td>" +  + "</td>";
                     });
                 }
-            })
+            }).then(() => document.getElementById('showCategory').innerHTML = temp)
             .catch(error => console.log(error));
-        document.getElementById('showCategory').innerHTML = temp;
     }
     myFunction1()
 </script>

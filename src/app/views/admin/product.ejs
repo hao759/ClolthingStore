@@ -126,10 +126,10 @@
 
         <!-- ====================================================================== -->
         <%- include('partial/layoutAdmin2'); %>
-            <script defer>
-                async function myFunction() {
+            <script>
+                function myFunction() {
                     let temp = "";
-                    await fetch("/getListProduct")
+                    fetch("/getListProduct")
                         .then(response => response.json())
                         .then(data => {
                             if (data.message.length > 0) {
@@ -148,16 +148,15 @@
                                         <button data-id= ${itemData._id} class="btn btn-danger" onclick="deleteProduct(this)" style="display: inline-block;"
                                 onclick="return confirm('Are you sure?')">Xóa
                                  Sản phẩm
-                            </button>
-                             </form> `+
-                                        "</td>";
+                            </button> </form> `+ "</td>";
                                     temp += "</tr>";
                                 });
                             }
+                        }).then(() => {
+                            document.getElementById('body_table').innerHTML = temp;
+                            $('#example').DataTable();
                         })
                         .catch(error => console.log(error));
-                    document.getElementById('body_table').innerHTML = temp;
-                    $('#example').DataTable();
                 }
                 myFunction()
             </script>
@@ -167,7 +166,6 @@
                      $('#example').DataTable();
                 });
             </script> -->
-
 
             <script>
                 function deleteProduct(element) {
@@ -204,7 +202,6 @@
                             $('#editid').val(data._id);
                             $('#editname').val(data.name);
                             $('#editdescription').val(data.description);
-                            // $('#editImg').val(data.categoryImage);
                         })
                 }
             </script>
@@ -256,8 +253,7 @@
                         body: formData
                     })
                         .then(response => {
-                            // Handle the response
-                            console.log(response)
+                            // console.log(response)
                             window.location.href = '/Category';
                         })
                         .catch(error => {

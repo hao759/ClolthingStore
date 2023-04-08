@@ -27,7 +27,6 @@
 </head>
 
 <body id="page-top">
-
     <!-- Page Wrapper -->
     <%- include('partial/layoutAdmin'); %>
         <!-- ==================================================================== -->
@@ -118,10 +117,10 @@
         <!-- ====================================================================== -->
         <%- include('partial/layoutAdmin2'); %>
             <script defer>
-                async function myFunction() {
+                function myFunction() {
 
                     let temp = "";
-                    await fetch("/getLisCategory")
+                    fetch("/getLisCategory")
                         .then(response => response.json())
                         .then(data => {
                             if (data.message.length > 0) {
@@ -143,26 +142,19 @@
                                     temp += "</tr>";
                                 });
                             }
+                        }).then(() => {
+                            document.getElementById('body_table').innerHTML = temp;
+                            $('#example').DataTable();
                         })
                         .catch(error => console.log(error));
-                    document.getElementById('body_table').innerHTML = temp;
-                    $('#example').DataTable();
                 }
                 myFunction()
             </script>
-            <script>
-                // function callapi() {
-                //     console.log("abc")
-                //     document.querySelector('#example').DataTable();
-                // }
-                // callapi()
+            <!-- <script>
                 $(document).ready(function () {
                     console.log("=============ok")
-                    // $('#example').DataTable();
                 });
-            </script>
-
-
+            </script> -->
             <script>
                 function deleteCategory(element) {
                     var result = confirm("Want to delete?");
@@ -226,7 +218,6 @@
                             window.location.href = '/Category';
                         })
                         .catch(error => {
-                            // Handle the error
                         });
                 }
             </script>
@@ -263,29 +254,5 @@
             <script src="https://cdn.datatables.net/1.13.3/js/jquery.dataTables.min.js"></script>
             <!-- ====================================================================== -->
 </body>
-
-<!-- //     // element.event.preventdefault()
-//     const name = document.querySelector('#editname').value;
-//     const _id = document.querySelector('#editid').value;
-//     const description = document.querySelector('#editdescription').value;
-//     let _category = {
-//         _id,
-//         name,
-//         description
-//     }//tawts form ???????????
-//     fetch(`/updatCagetory`, {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/json'
-//         },
-//         body: JSON.stringify({ _category })
-//     })
-//         .then(response => {
-//             return response.text()
-//         }).then(response => {
-//             const data = JSON.parse(response);
-//             window.location.href = '/category';
-//         })
-// } -->
 
 </html>

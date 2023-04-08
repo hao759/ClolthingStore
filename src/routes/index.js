@@ -19,6 +19,7 @@ const {
 //   // // The output url
 //   // console.log("url", url);
 // });
+//==================================================================================================================
 router.get("/admin", admin.gotoadmin); //tới trang dashboard
 router.get("/signin", (req, res) => {
   res.render("login");
@@ -42,7 +43,7 @@ router.post("/adminsignUp", admin.signUp);
 router.post("/updateUser", admin.updateUser);
 router.post("/adminsignIn", admin.signIn);
 
-//Category
+//Category================================================================================
 const multer = require("multer");
 const shortid = require("shortid");
 const path = require("path");
@@ -72,7 +73,7 @@ router.post(
 );
 router.post("/deleteCategory", Category.deleteCategory);
 
-//Product========================================
+//Product=================================================================================================
 router.post("/addProduct", upload.single("productImage"), Product.addProduct);
 router.get("/Product", Product.renderview);
 router.get("/getListProduct", Product.getListProduct);
@@ -84,12 +85,12 @@ router.get(
 );
 router.post("/deleteProduct", Product.deleteProduct);
 
-//Cart
+//Cart=================================================================================================
 router.get("/Cart", Cart.viewCart);
 router.get("/getCartItems", requireSignin, Cart.getCartItems);
 router.post("/addItemToCart", requireSignin, Cart.addItemToCart);
 
-//Order
+//Order=================================================================================================
 router.post("/addOrder", requireSignin, Order.addOrder);
 
 module.exports = router;

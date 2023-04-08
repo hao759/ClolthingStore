@@ -260,27 +260,24 @@
                     token = `Bearer ${tokenjwt}`
                 else
                     token = "";
-                console.log(token)
+                // console.log(token)
                 fetch('/getCartItems', {
                     headers: {
                         'Authorization': token// 
                     }
                 })
                     .then(response => {
-                        console.log(response.status)
                         if (response.status == 400)
                             window.location.href = '/signin';
                         else
                             return response.json()
                     })
                     .then(data => {
-
                         if (data.cartItems.length > 0) {
                             document.getElementById('totalPrice').innerHTML = data.totalPrice.toLocaleString('vi-VN', { style: 'currency', currency: 'VND', minimumFractionDigits: 0 });
                             data.cartItems.forEach((itemData, index) => {
                                 console.log(itemData);
                                 temp += `<tr>
-                              
                         <td class="align-middle"><img src="${itemData.img}" alt="" style="width: 50px;">
                             <input type="hidden" class="form-control idProduct" value="${itemData._id}">
                           </td>
@@ -308,7 +305,6 @@
                         }
                     }).then(() => {
                         document.getElementById('body_table').innerHTML = temp;
-
                     })
                     .catch(error => console.log(error));
             }
@@ -317,11 +313,10 @@
                 let idProduct = document.getElementsByClassName('idProduct');
                 let qtyProduct = document.getElementsByClassName('qtyProduct');
                 let totalPrice = document.getElementById('totalPrice').innerText;
-
                 let totalAmount = totalPrice.substring(0, totalPrice.length - 2);
-                //  myString
                 let values = [];
-                console.log(totalAmount)
+
+                // console.log(totalAmount)
                 for (let i = 0; i < idProduct.length; i++) {
                     values.push({
                         productId: idProduct[i].value,
@@ -344,9 +339,10 @@
                 })
                     .then(response =>
                         response.json()
-                    ).then(response =>
+                    ).then(response => {
                         alert("Mua hàng thành công")
-                    )
+                        window.location.href = '/';
+                    })
             }
         </script>
 

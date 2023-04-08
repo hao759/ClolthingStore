@@ -146,22 +146,15 @@
         <!-- Shop Detail Start -->
         <div class="container-fluid py-5">
             <div id="showProduct" class="row px-xl-5" style="  margin-left: 40px;">
-                <!-- <form>
-                        <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" class="custom-control-input" id="size-1" name="size">
-                            <label class="custom-control-label" for="size-1">XS</label>
-                        </div>
-                    </form> -->
             </div>
         </div>
-        <script defer>
-            async function myFunction() {
-
+        <script>
+            function myFunction() {
                 var temp = "";
                 const path = new URL(window.location.href).pathname;
                 const parts = path.split('/');
                 const lastPart = parts[parts.length - 1];
-                await fetch(`/getProductByID/${lastPart}`)
+                fetch(`/getProductByID/${lastPart}`)
                     .then(response => response.json())
                     .then(data => {
                         console.log(data.message)
@@ -232,9 +225,8 @@
 </div>`
                             });
                         }
-                    })
+                    }).then(() => document.getElementById('showProduct').innerHTML = temp)
                     .catch(error => console.log(error));
-                document.getElementById('showProduct').innerHTML = temp
             }
             myFunction()
         </script>
@@ -341,38 +333,6 @@
         </div>
         <!-- Shop Detail End -->
 
-
-        <!-- Products Start -->
-        <!-- <div class="container-fluid py-5">
-
-        <div class="row px-xl-5">
-            <div class="col">
-                <div class="owl-carousel related-carousel">
-                    <div class="card product-item border-0">
-                        <div
-                            class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                            <img class="img-fluid w-100" src="../public/img/product-1.jpg" alt="">
-                        </div>
-                        <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
-                            <h6 class="text-truncate mb-3">Colorful Stylish Shirt</h6>
-                            <div class="d-flex justify-content-center">
-                                <h6>$123.00</h6>
-                                <h6 class="text-muted ml-2"><del>$123.00</del></h6>
-                            </div>
-                        </div>
-                        <div class="card-footer d-flex justify-content-between bg-light border">
-                            <a href="" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>View
-                                Detail</a>
-                            <a href="" class="btn btn-sm text-dark p-0"><i
-                                    class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> -->
-        <!-- Products End -->
-
         <!-- Footer Start -->
         <div class="container-fluid bg-secondary text-dark mt-5 pt-5">
             <div class="row px-xl-5 pt-5">
@@ -449,10 +409,6 @@
                 </div>
             </div>
         </div>
-        <!-- Footer End -->
-
-
-        <!-- Back to Top -->
         <a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
 
 
@@ -465,7 +421,6 @@
         <!-- Contact Javascript File -->
         <script src="../public/mail/jqBootstrapValidation.min.js"></script>
         <script src="../public/mail/contact.js"></script>
-
         <!-- Template Javascript -->
         <script src="../public/js/main.js"></script>
 </body>

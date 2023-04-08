@@ -1,56 +1,30 @@
-<!-- <%= parseInt(item.price) %> -->
-<!-- <img style="width: 100px;height: 100px;" src="<%= item.picture %>" /> -->
-
-
-script 
-code
-     myFunction()
-/script
-
-
+ const result = await _user.save();
+ await User.updateOne({ _id }, { userName, password });
+===========================================================================================
+  element.getAttribute('data-id')
+  let tokenjwt = localStorage.getItem("tokenjwt");
+                if (tokenjwt)
+                    token = `Bearer ${tokenjwt}`
+                else
+                    token = "";
+===========================================================================================
+ <!-- get status code from fetch -->
+                    .then(response => {
+                        if (response.status == 400)
+                            window.location.href = '/signin';
+                        else
+                            return response.json()
+===========================================================================================
 login lấy token cất,
 các hành động sau lấy ra xài
 
- <!-- get status code from fetch -->
-        <script>
-            function gotoadmin() {
-                let tokenjwt = localStorage.getItem("tokenjwt");
-                let token = tokenjwt ? "Bearer " + tokenjwt : "";
-                console.log("token== " + token)
-                fetch('/admin', {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': token
-                    },
-                    // body: JSON.stringify(tokenjwt)
-                })
-                    .then((response) => {
-                        if (response.status == 100)
-                            window.location.href = '/abc';
-                        // else
-                        //     window.location.href = '/xyz'; 
-                    }
-                    )
-            }
-
-            return res.status(400).json({  //100 ko duoc
-      mess: "Chỉ có admin mới có quyền này",
-    }); /
-
-
-
-    else
-        return response.json()
-
-
-
-                              console.log(element.getAttribute('data-id'))
-                              fetch('/addItemToCart', {
-                    method: 'POST',
+===========================================================================================
                     headers: {
                         'Content-Type': 'application/json',          <============
                         'Authorization': token
                     },
                     body: JSON.stringify(cartItems)
                 })
+===========================================================================================
+<!-- <%= parseInt(item.price) %> -->
+<!-- <img style="width: 100px;height: 100px;" src="<%= item.picture %>" /> -->

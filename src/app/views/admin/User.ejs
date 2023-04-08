@@ -116,22 +116,8 @@
         <!-- ====================================================================== -->
         <%- include('partial/layoutAdmin2'); %>
             <script>
-                // function initDataTable() {
-                //     const table = document.querySelector('#example');
-                //     const dataTable = new window.DataTable(table);
-                // }
-
-                // window.addEventListener('load', function () {
-                //     initDataTable();
-                // });
-                $(document).ready(function () {
-                    console.log("=============ok")
-                    // $('#example').DataTable();
-                });
-            </script>
-            <script defer>
-                async function myFunction() {
-                    console.log("fetch data")
+                function myFunction() {
+                    // console.log("fetch data")
                     let temp = "";
                     fetch("/getListUser")
                         .then(response => response.json())
@@ -161,7 +147,6 @@
                             $('#example').DataTable();
                         })
                         .catch(error => console.log(error));
-
                 }
                 myFunction()
             </script>
@@ -190,10 +175,8 @@
                         .then(response => {
                             return response.text()
                         }).then(response => {
-                            // const data = JSON.parse(response);
                             console.log(response)
-                            // const myLabel = document.querySelector('#notification');
-                            // myLabel.innerHTML = data.mess;
+
                             window.location.href = '/admin';
                         })
                 });

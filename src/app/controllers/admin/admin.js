@@ -37,7 +37,6 @@ exports.signIn = async (req, res) => {
     password: password,
   });
   if (user) {
-    console.log(user);
     const token = jwt.sign(
       { _id: user._id, isAdmin: user.isAdmin },
       process.env.JWT_SECRET,
@@ -75,18 +74,16 @@ exports.deleteUser = async (req, res) => {
       message: "OK",
     });
   } catch (error) {
-    console.log(error);
     return res.status(400).json({
       message: error,
     });
   }
-  // res.render("admin/blank", { data: result });
 };
 
 exports.getUser = async (req, res) => {
   try {
     let id = req.params.id;
-    let user = await User.findOne({ _id: id }); //deletedCount
+    let user = await User.findOne({ _id: id });
     return res.status(200).json({
       data: user,
     });
@@ -99,14 +96,12 @@ exports.getUser = async (req, res) => {
 };
 exports.updateUser = async (req, res) => {
   try {
-    console.log(req.body);
     let { _id, userName, password } = req.body._user;
     let user = await User.updateOne({ _id }, { userName, password });
     return res.status(200).json({
       data: user,
     });
   } catch (error) {
-    console.log(error);
     return res.status(400).json({
       message: error,
     });

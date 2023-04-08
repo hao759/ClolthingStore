@@ -34,7 +34,6 @@ exports.getLisCategory = async (req, res) => {
       message: error,
     });
   }
-  // res.render("admin/blank", { data: result });
 };
 exports.pageCategory = async (req, res) => {
   res.render("admin/cagetory");
@@ -65,7 +64,6 @@ exports.deleteCategory = async (req, res) => {
       message: error,
     });
   }
-  // res.render("admin/blank", { data: result });
 };
 exports.updatCagetory = async (req, res) => {
   try {
