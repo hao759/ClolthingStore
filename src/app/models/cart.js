@@ -14,6 +14,11 @@ const cartSchema = new mongoose.Schema({
     },
   ],
 });
+// cartSchema.virtual("PriceCart").get(function () {
+//   let total = this.ca;
+//   return `${this.firstName} ${this.lastName}`;
+// });
+
 // }, { timestamps: true });
 
 module.exports = mongoose.model("Cart", cartSchema);

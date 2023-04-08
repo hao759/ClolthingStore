@@ -62,8 +62,10 @@ exports.getCartItems = async (req, res) => {
     "_id name price productImage"
   );
   if (cart) {
-    let data = [];
+    let data = [],
+      totalPrice = 0;
     cart.cartItems.forEach((item, index) => {
+      totalPrice += parseInt(item.product.price) * parseInt(item.quantity);
       data[index] = {
         _id: item.product._id.toString(),
         name: item.product.name,
@@ -72,7 +74,7 @@ exports.getCartItems = async (req, res) => {
         qty: item.quantity,
       };
     });
-    res.status(200).json({ cartItems: data });
+    res.status(200).json({ cartItems: data, totalPrice });
   }
 };
 
