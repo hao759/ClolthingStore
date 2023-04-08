@@ -4,6 +4,7 @@ const admin = require("../app/controllers/admin/admin");
 const Category = require("../app/controllers/admin/category");
 const Product = require("../app/controllers/admin/product");
 const Cart = require("../app/controllers/cart");
+const Order = require("../app/controllers/order");
 const {
   requireSignin,
   adminMiddleware,
@@ -87,5 +88,8 @@ router.post("/deleteProduct", Product.deleteProduct);
 router.get("/Cart", Cart.viewCart);
 router.get("/getCartItems", requireSignin, Cart.getCartItems);
 router.post("/addItemToCart", requireSignin, Cart.addItemToCart);
+
+//Order
+router.post("/addOrder", requireSignin, Order.addOrder);
 
 module.exports = router;

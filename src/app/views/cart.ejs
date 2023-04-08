@@ -149,9 +149,10 @@
                         <div class="card-footer border-secondary bg-transparent">
                             <div class="d-flex justify-content-between mt-2">
                                 <h5 class="font-weight-bold">Total</h5>
-                                <h5 id="totalPrice" class="font-weight-bold">$160</h5>
+                                <h5 id="totalPrice" class="font-weight-bold">$0</h5>
                             </div>
-                            <button class="btn btn-block btn-primary my-3 py-3">Proceed To Checkout</button>
+                            <button onclick="addOrder()" class="btn btn-block btn-primary my-3 py-3">Proceed To
+                                Checkout</button>
                         </div>
                     </div>
                 </div>
@@ -279,7 +280,9 @@
                             data.cartItems.forEach((itemData, index) => {
                                 console.log(itemData);
                                 temp += `<tr>
+                              
                         <td class="align-middle"><img src="${itemData.img}" alt="" style="width: 50px;">
+                            <input type="hidden" class="form-control idProduct" value="${itemData._id}">
                           </td>
                         <td class="align-middle">${itemData.price}</td>
                         <td class="align-middle">
@@ -289,7 +292,7 @@
                                         <i class="fa fa-minus"></i>
                                     </button>
                                 </div>
-                                <input type="number" class="form-control form-control-sm bg-secondary text-center"
+                                <input type="number" class="form-control form-control-sm bg-secondary text-center qtyProduct"
                                     value="${itemData.qty}">
                                 <div class="input-group-btn">
                                     <button class="btn btn-sm btn-primary btn-plus">
@@ -310,6 +313,41 @@
                     .catch(error => console.log(error));
             }
             myFunction()
+            function addOrder() {
+                let idProduct = document.getElementsByClassName('idProduct');
+                let qtyProduct = document.getElementsByClassName('qtyProduct');
+                let totalPrice = document.getElementById('totalPrice').innerText;
+
+                let totalAmount = totalPrice.substring(0, totalPrice.length - 2);
+                //  myString
+                let values = [];
+                console.log(totalAmount)
+                for (let i = 0; i < idProduct.length; i++) {
+                    values.push({
+                        productId: idProduct[i].value,
+                        purchasedQty: qtyProduct[i].value
+                    });
+                }
+                let token = "";
+                let tokenjwt = localStorage.getItem("tokenjwt");
+                if (tokenjwt)
+                    token = `Bearer ${tokenjwt}`
+                else
+                    token = "";
+                fetch('/addOrder', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': token
+                    },
+                    body: JSON.stringify({ items: values, totalAmount })
+                })
+                    .then(response =>
+                        response.json()
+                    ).then(response =>
+                        alert("Mua hàng thành công")
+                    )
+            }
         </script>
 
         <!-- JavaScript Libraries -->
