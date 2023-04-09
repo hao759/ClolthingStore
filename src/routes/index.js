@@ -91,6 +91,8 @@ router.get("/getCartItems", requireSignin, Cart.getCartItems);
 router.post("/addItemToCart", requireSignin, Cart.addItemToCart);
 
 //Order=================================================================================================
+router.get("/order", Order.Order);
 router.post("/addOrder", requireSignin, Order.addOrder);
-
+router.get("/getListOrders", Order.getListOrders);
+router.get("/getOrders/:_id", Order.getOrders);
 module.exports = router;

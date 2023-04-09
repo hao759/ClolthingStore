@@ -16,18 +16,30 @@ exports.addOrder = (req, res) => {
     }
   });
 };
+exports.Order = (req, res) => {
+  res.render("admin/order");
+};
 
-// exports.getOrders = (req, res) => {
-//   Order.find({ user: req.user._id })
-//     .select("_id paymentStatus paymentType orderStatus items")
-//     .populate("items.productId", "_id name productPictures")
-//     .exec((error, orders) => {
-//       if (error) return res.status(400).json({ error });
-//       if (orders) {
-//         res.status(200).json({ orders });
-//       }
-//     });
-// };
+exports.getOrders = (req, res) => {
+  Order.find({ _id: req.params._id })
+    // .select("_id totalAmount createdAt")
+    .populate("items.productId", "_id name productImage price")
+    .then((data) => {
+      return res.status(200).json({
+        data: data,
+      });
+    });
+};
+exports.getListOrders = (req, res) => {
+  Order.find({})
+    .select("_id totalAmount createdAt")
+    // .populate("items.productId", "_id name productImage")
+    .then((data) => {
+      return res.status(200).json({
+        data: data,
+      });
+    });
+};
 
 // exports.getOrder = (req, res) => {
 //   Order.findOne({ _id: req.body.orderId })

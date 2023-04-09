@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Custom fonts for this template-->
+    <link href="public/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+    <!-- Custom styles for this template-->
+    <link href="public/css/sb-admin-2.min.css" rel="stylesheet">
+    <!-- ========================================= -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+</head>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <%- include('partial/layoutAdmin'); %>
+        <!-- ==================================================================== -->
+        <h1 style="text-align: center;">Danh sách đơn hàng</h1>
+        <!-- Modal update User============ -->
+
+
+        <table id="example" class="table table-striped container ">
+            <thead>
+                <tr>
+                    <th scope="col">Mã đơn hàng</th>
+                    <th scope="col">Tổng tiền</th>
+                    <th scope="col">Ngày mua</th>
+                    <th scope="col">Thao tác</th>
+                </tr>
+            </thead>
+            <tbody id="body_table"></tbody>
+        </table>
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Chi tiết đơn hàng:</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- <form> -->
+                        <table id="detail" class="table table-striped container ">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Tên sản phẩm</th>
+                                    <th scope="col">Hình ảnh</th>
+                                    <th scope="col">Giá</th>
+                                    <th scope="col">Số lượng mua</th>
+                                </tr>
+                            </thead>
+                            <tbody id="body_detail"></tbody>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                    <!-- </form> -->
+                </div>
+            </div>
+        </div>
+        <!-- ====================================================================== -->
+        <%- include('partial/layoutAdmin2'); %>
+            <script>
+                let temp = "";
+                fetch("/getListOrders")
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.data.length > 0) {
+                            data.data.forEach((itemData) => {
+                                temp += "<tr>";
+                                temp += "<th  scope=`row`>" + itemData._id + "</th>";
+                                temp += "<td>" + parseInt(itemData.totalAmount).toLocaleString('vi-VN', { style: 'currency', currency: 'VND', minimumFractionDigits: 0 }) + "</td>";
+                                temp += "<td>" + itemData.createdAt.toLocaleString().slice(0, 10); + "</td>";
+                                //============================================================================
+                                temp += "<td>" + `<button data-id="${itemData._id}" onclick="getdetail(this)" type="button" class="btn btn-info"  data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Xem chi tiết</button>`
+                                temp += "</tr>";
+                            });
+                        }
+                    }).then(() => {
+                        document.getElementById('body_table').innerHTML = temp;
+                        $('#example').DataTable();
+                    })
+                    .catch(error => console.log(error));
+            </script>
+            <script>
+                let tokenjwt = localStorage.getItem("tokenjwt");
+                if (!tokenjwt)
+                    window.location.href = '/signin';
+
+                function getdetail(element) {
+                    let temp1 = "";
+                    let id = element.getAttribute('data-id')
+                    fetch("/getOrders/" + id)
+                        .then(response => response.json())
+                        .then(data => {
+                            console.log(data.data)
+                            if (data.data.length > 0) {
+                                data.data[0].items.forEach((itemData) => {
+                                    console.log(itemData.productId.name);
+                                    temp1 += "<tr>";
+                                    temp1 += "<th scope=`row`>" + itemData.productId.name + "</th>";
+                                    temp1 += `<td><img width="100px" height="100px" src=${itemData.productId.productImage}></td>`;
+                                    temp1 += "<td>" + parseInt(itemData.productId.price).toLocaleString('vi-VN', { style: 'currency', currency: 'VND', minimumFractionDigits: 0 }) + "</td>";
+                                    temp1 += "<td>" + itemData.purchasedQty + "</td>";
+                                    temp1 += "</tr>";
+                                });
+                            }
+                        }).then(() => {
+                            document.getElementById('body_detail').innerHTML = temp1;
+                            $('#detail').DataTable();
+                        })
+                        .catch(error => console.log(error));
+                }
+            </script>
+
+            <img src="" alt="">
+            <link rel="stylesheet" href="https://cdn.datatables.net/1.13.3/css/jquery.dataTables.min.css">
+            <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+            <script src="https://cdn.datatables.net/1.13.3/js/jquery.dataTables.min.js"></script>
+
+</body>
+
+
+</html>
