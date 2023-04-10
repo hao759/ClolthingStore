@@ -26,7 +26,7 @@
                                     value="qhao74154@gmail.com">
                             </div>
                             <div class="form-group">
-                                <input value="qhao74154@gmail.com" id="password" type="password" class="form-control"
+                                <input value="123456" id="password" type="password" class="form-control"
                                     placeholder="Password" required>
                                 <span toggle="#password-field"
                                     class="fa fa-fw fa-eye field-icon toggle-password"></span>
@@ -76,8 +76,12 @@
                 },
                 body: JSON.stringify(_user)
             })
-                .then(response =>
-                    response.json()
+                .then(response => {
+                    if (response.status == 200)
+                        return response.json()
+                    else
+                        alert("Sai tài khoản")
+                }
                 ).then(response => {
                     if (response.message) {
                         localStorage.setItem("tokenjwt", response.message)

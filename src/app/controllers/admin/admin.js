@@ -1,6 +1,6 @@
 const User = require("../../models/user");
 const jwt = require("jsonwebtoken");
-
+const bcrypt = require("bcrypt");
 exports.signUp = async (req, res) => {
   //   User.findOne({ email: req.body.email }).exec((err, user) => {
   //     if (err) {
@@ -11,10 +11,10 @@ exports.signUp = async (req, res) => {
   //     }
   //   });
   const { userName, password, email } = req.body;
-  //   const hashPassword = await bcrypt.hash(password, 10);
+  const hashPassword = await bcrypt.hash(password, 10);
   const _user = new User({
     userName,
-    password,
+    password: hashPassword,
     email,
     isAdmin: true,
   });
@@ -34,8 +34,22 @@ exports.signIn = async (req, res) => {
   let { email, password } = req.body;
   let user = await User.findOne({
     email: email,
-    password: password,
   });
+  try {
+    if (user) {
+      let isPassword = await bcrypt.compare(password, user.password);
+      if (!isPassword) {
+        return res.status(400).json({
+          message: "Something went wrong",
+        });
+      }
+    }
+  } catch (error) {
+    return res.status(400).json({
+      message: "Something went wrong",
+    });
+  }
+
   if (user) {
     const token = jwt.sign(
       { _id: user._id, isAdmin: user.isAdmin },
